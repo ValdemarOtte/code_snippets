@@ -8,13 +8,20 @@ import csv
 # Local files
 
 
-def read_csv(path: Path, encoding: str = "UTF-8") -> list[str]:
+def read_csv(path: Path, encoding: str = "UTF-8", header: bool = True) -> tuple[list[str], list[list[str]]]:
     """
-    Read txt-file and return lines.
+    Read csv-file and return the header and its content.
 
-    :param Path txt_path: Path to txt-file.
-    :param str encoding: Encoding for the txt-file. Default is 'UTF-8'.
-    :return list[str]: A list of strings with the content of the file.
+    :param Path path: Path to csv-file.
+    :param str encoding: Encoding for the csv-file. Default is `UTF-8`.
+    :param bool header: Bool value whether the csv-file contains a header or not. Default is `True`.
+    :return tuple[list[str], list[list[str]]]: A tuple with the header and content of the csv-file.
     """
-    with open(path, 'r') as file:
-        csvreader = csv.reader(file, encoding=encoding)
+    with open(path, "r", encoding=encoding) as file:
+        csvreader = csv.reader(file)
+        if header:
+            fields = next(csvreader)
+        rows = [row for row in csvreader]
+        return fields, rows
+    
+print(read_csv("read_and_write\\test.csv"))
