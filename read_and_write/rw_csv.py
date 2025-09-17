@@ -24,4 +24,11 @@ def read_csv(path: Path, encoding: str = "UTF-8", header: bool = True) -> tuple[
         rows = [row for row in csvreader]
         return fields, rows
     
-print(read_csv("read_and_write\\test.csv"))
+
+def write_csv(path: Path, fields: list[str], rows: list[list[str]], encoding: str = "UTF-8", mode: str = "w") -> None:
+    """"""
+    if mode == "w":
+        rows = [fields] + rows
+    with open(path, mode=mode, encoding=encoding, newline="\n") as file:
+        writer = csv.writer(file, delimiter=";")
+        writer.writerows(rows)
