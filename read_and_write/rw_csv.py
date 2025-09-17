@@ -26,7 +26,17 @@ def read_csv(path: Path, encoding: str = "UTF-8", header: bool = True) -> tuple[
     
 
 def write_csv(path: Path, fields: list[str], rows: list[list[str]], encoding: str = "UTF-8", mode: str = "w") -> None:
-    """"""
+    """
+    Write to a csv-file row by row.
+
+    Default mode is `w` (write). Set mode to `a` for append to end for the csv-file.
+
+    :param Path path: Path to csv-file.
+    :param list[str] fields: A list of fields for the csv-file. 
+    :param list[list[str]] rows: List of lists with the content, which will be writed to the csv-file.
+    :param str encoding: Encoding for the csv-file. Default is `UTF-8`.
+    :param str mode: Mode for file. Default is `w`.
+    """
     if mode == "w":
         rows = [fields] + rows
     with open(path, mode=mode, encoding=encoding, newline="\n") as file:
