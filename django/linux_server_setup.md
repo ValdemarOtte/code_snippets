@@ -117,3 +117,17 @@ and add the IP to allowed hosts list.
 `sudo a2ensite django_project`
 
 `sudo a2dissite 000-default.conf`
+
+## Step 11. Update permissions
+
+`sudo chown :www-data django_project/db.sqlite3`
+
+`sudo chmod 664 django_project/db.sqlite3`
+
+`sudo chown :www-data django_project/`
+
+`sudo chmod 755 /home/<USER>/<PROJECT>/`
+
+## Step 12. Restarting the Server & Running the Site
+
+`sudo service apache2 restart`
